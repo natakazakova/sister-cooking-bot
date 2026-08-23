@@ -52,7 +52,9 @@ def parse_recipe_markdown(markdown, path):
     return {
         "title": title_match.group(1).strip() if title_match else "",
         "description": (
-            description_match.group(1).strip()
+            str(front_matter["description"]).strip()
+            if front_matter.get("description") is not None
+            else description_match.group(1).strip()
             if description_match
             else ""
         ),
