@@ -10,6 +10,7 @@ from telegram.ext import (
 )
 
 from recipe import back_to_category, recipes, show_category, show_recipe
+from blog import blog
 
 load_dotenv()
 
@@ -20,6 +21,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
         "Привет! Я бот для sister.cooking 🍳\n\n"
         "/recipes — рецепты"
+        "\n/blog — публикации в блоге"
     )
 
 
@@ -28,6 +30,7 @@ def main():
 
     app.add_handler(CommandHandler("start", start))
     app.add_handler(CommandHandler("recipes", recipes))
+    app.add_handler(CommandHandler("blog", blog))
     app.add_handler(CommandHandler("back", back_to_category))
     app.add_handler(
         CallbackQueryHandler(

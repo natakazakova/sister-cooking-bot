@@ -108,6 +108,17 @@ def get_github_file(path):
     return base64.b64decode(data["content"]).decode("utf-8")
 
 
+def get_github_directory(path):
+    url = f"{GITHUB_API}/repos/{GITHUB_OWNER}/{GITHUB_REPO}/contents/{path}"
+    response = requests.get(
+        url,
+        headers=github_headers(),
+        params={"ref": GITHUB_BRANCH},
+    )
+    response.raise_for_status()
+    return response.json()
+
+
 def get_image_file(url):
     response = requests.get(url, timeout=30)
     response.raise_for_status()
